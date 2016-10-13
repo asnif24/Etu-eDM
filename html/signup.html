@@ -5,11 +5,11 @@
 		Password: <input type="password" id="password" ng-model="password"><br>
 		<button type="button" ng-click="submit()">Sign up</button>
 	</form>
-	<form ng-controller="accountCtrl" ng-repeat="account in accounts">
-		<h5>
+	<div ng-controller="accountCtrl">
+		<div ng-repeat="account in accounts">
 			Email: {{account.email}}
 			Username: {{account.username}}
 			Password: {{account.password}}
-		</h5>
-	</form>
+		</div>
+	</div>
 </div>

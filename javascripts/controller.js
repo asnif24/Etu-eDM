@@ -17,6 +17,11 @@ app.config(function($routeProvider){
 	.when('/signup',{
 		templateUrl: 'html/signup.html'
 	})
+	//
+	.when('/test',{
+		templateUrl: 'html/test.html'
+	})
+	//
 	.otherwise({
 		redirectTo: '/'
 	});
@@ -53,10 +58,11 @@ app.controller('registerCtrl',['$scope','$http', function($scope,$http){
 			"username": $scope.username,
 			"password": $scope.password
 		};
-		$http.post('json/accounts.json').success(function(data){
-			data.push(accountData);
+		$http.post('json/accounts.json',accountData).success(function(){
+			//data.push(accountData);
+			$scope.msg = 'Data saved';
 		});	
-	}
+	};
 
 
 	// var store=this;
@@ -74,11 +80,9 @@ app.controller('registerCtrl',['$scope','$http', function($scope,$http){
 	// };
 }]);
 
-app.controller('accountCtrl', ['$http', function($http){
-	var acc = this;
-	acc.accounts = [];
+app.controller('accountCtrl', ['$scope','$http', function($scope,$http){
 	$http.get('json/accounts.json').success(function(data){
-		acc.accounts=data;
+		$scope.accounts=data;
 	});
 }]);
 

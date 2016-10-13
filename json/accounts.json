@@ -13,5 +13,10 @@
 		"email":"ccc@gmail.com",
 		"username":"ccc",
 		"password":"ccc"
+	},
+	{
+		"email":"ddd@gmail.com",
+		"username":"ddd",
+		"password":"ddd"
 	}
 ]

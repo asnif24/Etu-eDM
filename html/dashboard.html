@@ -1,3 +1,15 @@
+<section ng-controller="panelCtrl">
+	<ul class="nav nav-pills">
+		<li ng-class="{ active: panelCtrl.isSelected(1) }">
+			<a href ng-click="panelCtrl.selectTab(1)">建立新任務</a>
+		</li>
+		<li ng-class="{ active: panelCtrl.isSelected(2) }">
+			<a href ng-click="panelCtrl.selectTab(2)">觀看結果</a>
+		</li>
+	</ul>
+	<h1>fhgvhgb{{"panelCtrl.tab"}}{{}}</h1>
+
+<!--
 <div>
 	<form>
 		<h3>選擇任務型式
@@ -9,3 +21,9 @@
 		選擇檔案(.zip): <input type="file" accept=".zip"><br>
 	</form>
 </div>
+-->
+	<div class="panel" ng-show="panelCtrl.isSelected(1)"> 
+		<h4>Description </h4>
+	</div>
+
+</section>

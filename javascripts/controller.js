@@ -21,6 +21,12 @@ app.config(function($routeProvider){
 	.when('/test',{
 		templateUrl: 'html/test.html'
 	})
+	.when('/task',{
+		templateUrl: 'html/task.html'
+	})
+	.when('/result',{
+		templateUrl: 'html/result.html'
+	})
 	//
 	.otherwise({
 		redirectTo: '/'
@@ -51,7 +57,6 @@ app.controller('signupCtrl', function($scope,$location){
 });
 
 app.controller('registerCtrl',['$scope','$http', function($scope,$http){
-	
 	$scope.submit=function(){
 		var accountData={
 			"email": $scope.email,
@@ -85,6 +90,16 @@ app.controller('accountCtrl', ['$scope','$http', function($scope,$http){
 		$scope.accounts=data;
 	});
 }]);
+
+app.controller("panelCtrl", function(){
+	this.tab=1;
+	this.selectTab=function(setTab){
+		this.tab=setTab;
+	};
+	this.isSelected=function(checkTab){
+		return true;//this.tab==checkTab;
+	};
+});
 
 
 

@@ -90,6 +90,7 @@ app.controller('registerCtrl',['$scope','$http', function($scope,$http){
 
 app.controller('accountCtrl', ['$scope','$http', function($scope,$http){
 	$http.get('json/accounts.json').success(function(data){
+		console.log(data);
 		$scope.accounts=data;
 	});
 }]);
@@ -103,6 +104,20 @@ app.controller("panelCtrl", function(){
 		return true;//this.tab==checkTab;
 	};
 });
+//python check program
+app.controller("pyCtrl", ['$scope', '$http', function($scope, $http){
+	$scope.submit=function(){
+		var name=$scope.edmTaskName;
+		console.log(5);
+		$http.post('check_zip_format_py.py').success(function(data){
+			//data.push(accountData);
+			console.log(data);
+			console.log(name);
+			$scope.msg = 'Data saved';
+			console.log(6);
+		});
+	}
+}])
 
 
 

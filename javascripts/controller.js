@@ -21,8 +21,11 @@ app.config(function($routeProvider){
 	.when('/test',{
 		templateUrl: 'html/test.html'
 	})
-	.when('/task',{
-		templateUrl: 'html/task.html'
+	.when('/task_eDM',{
+		templateUrl: 'html/task_eDM.html'
+	})
+	.when('/task_SMS',{
+		templateUrl: 'html/task_SMS.html'
 	})
 	.when('/result',{
 		templateUrl: 'html/result.html'

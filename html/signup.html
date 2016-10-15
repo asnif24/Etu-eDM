@@ -6,6 +6,7 @@
 		<button type="button" ng-click="submit()">Sign up</button>
 	</form>
 	<div ng-controller="accountCtrl">
+		{{accounts}}
 		<div ng-repeat="account in accounts">
 			Email: {{account.email}}
 			Username: {{account.username}}

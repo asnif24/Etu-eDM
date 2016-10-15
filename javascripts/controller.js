@@ -66,9 +66,18 @@ app.controller('registerCtrl',['$scope','$http', function($scope,$http){
 			"username": $scope.username,
 			"password": $scope.password
 		};
-		$http.post('json/accounts.json',accountData).success(function(){
+		console.log(accountData);
+		console.log(5566);
+		$http.post('json/accounts',JSON.stringify(accountData))
+		.success(function(data){
 			//data.push(accountData);
+			console.log("success");
+			console.log(data);
 			$scope.msg = 'Data saved';
+		})
+		.error(function(data){
+			console.log("error");
+			console.log(data);
 		});	
 	};
 
@@ -90,7 +99,7 @@ app.controller('registerCtrl',['$scope','$http', function($scope,$http){
 
 app.controller('accountCtrl', ['$scope','$http', function($scope,$http){
 	$http.get('json/accounts.json').success(function(data){
-		console.log(data);
+		// console.log(data);
 		$scope.accounts=data;
 	});
 }]);
@@ -109,12 +118,13 @@ app.controller("pyCtrl", ['$scope', '$http', function($scope, $http){
 	$scope.submit=function(){
 		var name=$scope.edmTaskName;
 		console.log(5);
-		$http.post('check_zip_format_py.py').success(function(data){
+		$http.post('json/accounts.json',"name").success(function(data){
 			//data.push(accountData);
 			console.log(data);
 			console.log(name);
 			$scope.msg = 'Data saved';
 			console.log(6);
+			$scope.zz=data;
 		});
 	}
 }])

@@ -1,21 +1,34 @@
 <!-- <button type="button" href="#task_eDM">建立新任務</button>
 <button type="button" ng-click="">觀看結果</button> -->
-<a href="#task_eDM">建立新任務(eDM)</a><br>
+<!-- <a href="#task_eDM">建立新任務(eDM)</a><br>
 <a href="#task_SMS">建立新任務(SMS)</a><br>
-<a href="#result">觀看結果</a>
+<a href="#result">觀看結果</a> -->
 
-<!-- <section ng-controller="panelCtrl">
+<section ng-controller="panelCtrl">
 	<ul class="nav nav-pills">
-		<li ng-class="{ active: panelCtrl.isSelected(1) }">
-			<a href ng-click="panelCtrl.selectTab(1)">建立新任務</a>
+		<li ng-class="{ active: isSelected(1) }">
+			<a href ng-click="selectTab(1)">建立新任務(eDM)</a>
 		</li>
-		<li ng-class="{ active: panelCtrl.isSelected(2) }">
-			<a href ng-click="panelCtrl.selectTab(2)">觀看結果</a>
+		<li ng-class="{ active: isSelected(2) }">
+			<a href ng-click="selectTab(2)">建立新任務(SMS)</a>
+		</li>
+		<li ng-class="{ active: isSelected(3) }">
+			<a href ng-click="selectTab(3)">觀看結果</a>
 		</li>
 	</ul>
 	
+	<div class="panelCtrl" ng-show="isSelected(1)">
+		<task-edm></task-edm>
+	</div>
+	<div class="panelCtrl" ng-show="isSelected(2)">
+		<task-sms></task-sms>
+	</div>
+	<div class="panelCtrl" ng-show="isSelected(3)">
+		<task-result></task-result>
+	</div>
 
 
+<!-- 
 <div>
 	<form>
 		<h3>選擇任務型式
@@ -28,8 +41,8 @@
 	</form>
 </div>
 
-	<div class="panel" ng-show="panelCtrl.isSelected(1)"> 
+	<div class="panelCtrl" ng-show="panelCtrl.isSelected(1)"> 
 		<h4>Description </h4>
-	</div>
+	</div> -->
 
-</section> -->
+</section>

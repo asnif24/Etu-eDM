@@ -1,17 +1,20 @@
-<div ng-controller="pyCtrl">
-	eDM任務名稱：<input type="text" ng-model="edmTaskName"><br>
-	選擇檔案(.zip): <input type="file" accept=".zip"><br>
-	<button type="button" ng-click="submit()">送出</button><br>
+<div>
+	eDM任務名稱：<input type="text" ng-model="edmTaskName" required><br>
+	選擇檔案(.zip): <input type="file" ng-model="edmFile" accept=".zip" required><br>
+	<button type="button" ng-click="edmSubmit()">送出</button><br>
 	<br>
 	status:<br>
 	<div>
 		...
 	</div>
 
-	<div id="signup-form" >
-    		<form id="form1" action="check_zip_format_py.py" method="post">         
-        		<input type="text" name="file"/>
-        		<input name="commit" type="submit" value="send"/>
+	<div id="signup-form"  ng-controller="pyCtrl">
+    		<form id="form1" method="post">         
+        		<input type="text" ng-model="edmTaskName"/>
+        		<!-- <input name="commit" type="submit" value="send"/> -->
+        		<button type="button" ng-click="submit()">送出</button><br>
+        		<p>{{edmTaskName}}</p>
+        		<p>{{bb}}</p>
 		</form>
 	</div>
 </div>

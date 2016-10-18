@@ -108,6 +108,13 @@ app.directive("taskEdm", function(){
 	};
 });
 
+app.directive("resultEdm", function(){
+	return{
+		restrict:"E",
+		templateUrl:"html/result_eDM.html"
+	};
+});
+
 app.directive("taskSms", function(){
 	return{
 		restrict:"E",
@@ -115,32 +122,48 @@ app.directive("taskSms", function(){
 	};
 });
 
-app.directive("taskResult", function(){
+app.directive("resultSms", function(){
 	return{
 		restrict:"E",
-		templateUrl:"html/result.html"
+		templateUrl:"html/result_SMS.html"
 	};
 });
 
 
 
 
-
 //python check program
-app.controller("pyCtrl", ['$scope', '$http', function($scope, $http){
+app.controller("pyCtrl", function($scope, $http){
 	$scope.submit=function(){
-		var name=$scope.edmTaskName;
-		console.log(5);
-		$http.post('json/accounts.json',"name").success(function(data){
-			//data.push(accountData);
-			console.log(data);
-			console.log(name);
-			$scope.msg = 'Data saved';
-			console.log(6);
-			$scope.zz=data;
+		// var name=$scope.edmTaskName;
+		console.log($scope.edmTaskName);
+		$scope.bb="hi~";
+		// $http.post('json/accounts.json',"name").success(function(data){
+		// 	//data.push(accountData);
+		// 	console.log(data);
+		// 	console.log(name);
+		// 	$scope.msg = 'Data saved';
+		// 	console.log(6);
+		// 	$scope.zz=data;
+		// });
+		$.ajax({
+			type: "POST",
+			url: "check_zip_format_py",
+			data: $scope.edmTaskName,
+		// }).done(function(o) {
+		// 	// do something
+		// 	console.log("@@");
+		// 	console.log(data);
+		// 	$scope.aa=data;
+			success: callbackFunc
 		});
+		function callbackFunc(response) {
+    // do something with the response
+    		console.log(response);
+		}
+		// console.log(aa);
 	}
-}])
+})
 
 
 

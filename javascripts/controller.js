@@ -132,6 +132,7 @@ app.directive("resultSms", function(){
 
 
 
+
 //python check program
 app.controller("pyCtrl", function($scope, $http){
 	$scope.submit=function(){
@@ -163,8 +164,58 @@ app.controller("pyCtrl", function($scope, $http){
 		}
 		// console.log(aa);
 	}
-})
+});
 
+
+
+// app.controller("phpCtrl", function($scope){
+// 	$scope.go=function(){
+// 		var test=$scope.test;
+// 		var aa=$scope.aaaa;
+// 		$.ajax({
+// 			url:'php/test.php',
+// 			type:'POST',                                  //or get up to you
+// 			data:{
+// 			    data:test,
+// 			    // param:"etu"
+// 			},
+// 			success:function(resp){
+// 			   // sresp = JSON.parse(resp);
+// 			   console.log(resp);
+// 			   aa=resp;
+// 			   // console.log(test);
+// 			   console.log(aa);
+// 			}
+// 		});
+// 		var aaa=aa;
+// 		console.log(aaa);
+// 	}
+// });
+
+app.controller("smsTaskCtrl", function($scope, $http){
+	$scope.go=function(){
+		var file_name=$scope.fileName;
+		// $http.post('sms/csvreader.php',{
+		$http.post('php/test.php',{
+			fileName:file_name
+		}).success(function(data){
+			$scope.msg=data;
+			console.log(data);
+		});
+	}
+});
+
+app.controller("smsResultCtrl", function($scope, $http){
+	$scope.go=function(){
+		var file_name=$scope.fileName;
+		// $http.post('sms/csvreader.php',{
+		$http.post('sms/txtreader.php',{
+			fileName:file_name
+		}).success(function(data){
+			$scope.smsResult=data;
+		});
+	}
+});
 
 
 

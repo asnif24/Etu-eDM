@@ -1,1 +1,18 @@
-result_SMS.html
+<div ng-controller="smsResultCtrl">
+	<h3>選擇任務
+	<select>
+    	<option>task1</option>
+    	<option>task2</option>
+    	<option>task3</option>
+    	<option>task4</option>
+    	<option>task5</option>
+	</select>
+	</h3>
+	<button type="button">送出</button><br>
+
+		<input type="text" ng-model="fileName">
+		<button type="button" ng-click="go()">送出</button><br>
+		<p>Delivered Rate: {{smsResult.delivered_rate}}</p>
+		<p>Undelivered Rate: {{smsResult.undelivered_rate}}</p>
+		<p>Fail Rate: {{smsResult.sendMsgFail_rate}}</p>
+</div>

@@ -1,1 +1,21 @@
 result_eDM.html
+<div ng-controller="phpCtrl">
+	<button type="button" ng-click="go()">GO!!!</button><br>
+	result: {{msg}}
+</div>
+
+<div ng-controller="edmResultCtrl">
+	<h3>選擇任務
+	<select id="selectTask">
+    	<option ng-repeat="edmTask in edmTasks" value="{{edmTask.taskID}}">{{edmTask.taskName}}</option>
+	</select>
+	<button type="button" ng-click="submit()">送出</button><br>
+	{{taskID}}
+	</h3>
+	<h5>
+		<p>Query Time : {{edmResult.query_time}}</p>
+		<p>Open Rate : {{edmResult.open_rate}}</p>
+		<p>Bounce Rate : {{edmResult.bounce_rate}}</p>
+		<p>Click Rate : {{edmResult.click_rate}}</p>
+	</h5>
+</div>

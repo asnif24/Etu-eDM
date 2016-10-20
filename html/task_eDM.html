@@ -1,21 +1,10 @@
-<div>
-	eDM任務名稱：<input type="text" ng-model="edmTaskName" maxlength="50" required><br>
-	選擇檔案(.zip): <input type="file" ng-model="edmFile" accept=".zip" required><br>
-	<button type="button" ng-click="edmSubmit()">送出</button><br>
-	<br>
-	status:<br>
-	<div>
-		...@@
-		<!-- <img src="picture/default.gif"> -->
-	</div>
-
-	<div id="signup-form"  ng-controller="pyCtrl">
-    		<form id="form1" method="post">         
-        		<input type="text" ng-model="edmTaskName"/>
-        		<!-- <input name="commit" type="submit" value="send"/> -->
-        		<button type="button" ng-click="submit()">送出</button><br>
-        		<p>{{edmTaskName}}</p>
-        		<p>{{bb}}</p>
-		</form>
-	</div>
+<div ng-controller="edmTaskCtrl">
+	<form method="post">         
+		eDM任務名稱：<input type="text" ng-model="edmTaskName" maxlength="50"><br>
+		選擇檔案(.zip): <input type="file" ng-model="edmFile" id="edmFile" name="edmFile"><br>
+		<button type="button" ng-click="submit()">送出</button><br>
+		<p>{{edmTaskName}}</p>
+		<p>{{fileName}}</p>
+		<p>{{msg.status}}</p>
+	</form>
 </div>

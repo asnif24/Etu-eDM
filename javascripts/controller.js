@@ -204,16 +204,40 @@ app.controller("edmResultCtrl", function($scope, $http){
 
 
 app.controller("smsTaskCtrl", function($scope, $http){
-	$scope.go=function(){
-		var file_name=$scope.fileName;
-		// $http.post('sms/csvreader.php',{
-		$http.post('php/test.php',{
-			fileName:file_name
-		}).success(function(data){
-			$scope.msg=data;
-			console.log(data);
+	$scope.submit=function(){
+		//get the file name
+		$scope.fileName=document.getElementById("smsFile").value.replace(/.*[\/\\]/, '');
+		console.log(document.getElementById("smsFile").value.replace(/.*[\/\\]/, ''));
+		//upload file via php
+		var file_data = $("#smsFile").prop("files")[0];   
+		var form_data = new FormData();                  
+		form_data.append("file", file_data)
+		$.ajax(
+	  	{
+			url: "./php/smsUpload.php",
+			type: "POST",
+			data: form_data,
+			processData: false,
+			contentType: false,
+			success: function(data){
+				console.log(data);
+				console.log("WOWOWOWWOW");
+			} 
 		});
-	}
+		
+		//call csvreader.php to send sms
+		$http.post('php/csvreader.php',{
+			// sendfilename
+			fileName: $scope.fileName
+		}).success(function(data){
+			// $scope.msg=JSON.parse(data);
+			$scope.msg=data;
+			console.log("@@");
+			console.log($scope.msg);
+		});
+	};
+
+
 });
 
 app.controller("smsResultCtrl", function($scope, $http){

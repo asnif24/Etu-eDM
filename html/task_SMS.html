@@ -1,13 +1,8 @@
-<div>
-	SMS任務名稱：<input type="text" ng-model="smsTaskName" maxlength="50" required><br>
-	選擇檔案(.csv): <input type="file" ng-model="smsFile" accept=".csv" required><br>
-	<button type="button" ng-click="smsSubmit()">送出</button><br>
-	<br>
-	status:<br>
-	<div ng-controller="smsTaskCtrl">
-		<input type="text" ng-model="fileName">
-		<button type="button" ng-click="go()">送出</button><br>
-		{{msg}}<br>
-	</div>
-
+<div ng-controller="smsTaskCtrl">
+	<form method="post">         
+		SMS任務名稱：<input type="text" ng-model="smsTaskName" maxlength="50"><br>
+		選擇檔案(.csv): <input type="file" ng-model="smsFile" id="smsFile" name="smsFile" accept=".csv"><br>
+		<button type="button" ng-click="submit()">送出</button><br>
+		<p>{{msg}}</p>
+	</form>
 </div>

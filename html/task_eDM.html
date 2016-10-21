@@ -1,7 +1,7 @@
 <div ng-controller="edmTaskCtrl">
 	<form method="post">         
 		eDM任務名稱：<input type="text" ng-model="edmTaskName" maxlength="50"><br>
-		選擇檔案(.zip): <input type="file" ng-model="edmFile" id="edmFile" name="edmFile"><br>
+		選擇檔案(.zip): <input type="file" ng-model="edmFile" id="edmFile" name="edmFile" accept=".zip"><br>
 		<button type="button" ng-click="submit()">送出</button><br>
 		<p>{{edmTaskName}}</p>
 		<p>{{fileName}}</p>

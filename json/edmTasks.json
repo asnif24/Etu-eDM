@@ -1,5 +1,1 @@
-[
-	{"taskName":"asnif1","taskID":"123"},
-	{"taskName":"asnif2","taskID":"456"},
-	{"taskName":"asnif3","taskID":"789"}
-]
+[{"taskName":"asnif1","taskID":"123"},{"taskName":"asnif2","taskID":"456"},{"taskName":"asnif3","taskID":"789"}]

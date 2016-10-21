@@ -5,5 +5,5 @@
 	$python='get_edm_report.py';
 	$command='';
 	$output=shell_exec($command);
-	print $output;
+	echo $output;
 ?>

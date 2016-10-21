@@ -1,10 +1,10 @@
 <div ng-controller="smsResultCtrl">
 	<h3>選擇任務
-	<select id="selectTask">
-    	<option ng-repeat="smsTask in smsTasks" value="{{smsTask.taskID}}">{{edmTask.taskName}}</option>
+	<select id="smsSelectTask">
+    	<option ng-repeat="smsTask in smsTasks" value="{{smsTask.fileName}}">{{smsTask.taskName}}</option>
 	</select>
 	<button type="button" ng-click="submit()">送出</button><br>
-	{{taskID}}
+	{{fileName}}
 	</h3>
 	<h5>
 		<p>Delivered Rate: {{smsResult.delivered_rate}}</p>

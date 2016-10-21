@@ -1,12 +1,6 @@
-result_eDM.html
-<div ng-controller="phpCtrl">
-	<button type="button" ng-click="go()">GO!!!</button><br>
-	result: {{msg}}
-</div>
-
 <div ng-controller="edmResultCtrl">
 	<h3>選擇任務
-	<select id="selectTask">
+	<select id="edmSelectTask">
     	<option ng-repeat="edmTask in edmTasks" value="{{edmTask.taskID}}">{{edmTask.taskName}}</option>
 	</select>
 	<button type="button" ng-click="submit()">送出</button><br>

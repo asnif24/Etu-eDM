@@ -4,16 +4,14 @@
 	$task_name=$input->task_name;
 	$company_name=$input->company_name;
 	
-	$python='python ../python/get_zip_and_send_edm.py';
-	// $python='python ../get_zip_test.py';
-	// $python='python check_zip_format_py.py';
+	$zip_path="../edmFiles/".$zip_path;
+
+	$python='python /opt/edm/email/src/get_zip.py';
 	
-	$command=$python+'\ '+$zip_path+'\ '+$task_name+'\ '+$company_name;
-	// $command='python check_zip_format_py.py a b c';
-	// $command='python ../get_zip_test.py a b c';
+	$command=$python.' '.$zip_path.' '.$task_name.' '.$company_name.' 2>/tmp/error_htlin_`date`';
 
 	$output=shell_exec($command);
 	echo $output;
-	// echo json_encode($output);
-	// echo json_encode("{'status':'SUCCESS', 'task_id':'task_1234567890'}");
+	//echo json_encode($output);
+
 ?>

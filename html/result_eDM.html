@@ -4,9 +4,10 @@
     	<option ng-repeat="edmTask in edmTasks" value="{{edmTask.taskID}}">{{edmTask.taskName}}</option>
 	</select>
 	<button type="button" ng-click="submit()">送出</button><br>
-	{{taskID}}
+	<!--{{taskID}}-->
 	</h3>
 	<h5>
+		<p>Status : {{edmResult.status}}</p>
 		<p>Query Time : {{edmResult.query_time}}</p>
 		<p>Open Rate : {{edmResult.open_rate}}</p>
 		<p>Bounce Rate : {{edmResult.bounce_rate}}</p>

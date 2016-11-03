@@ -113,24 +113,19 @@ app.directive("resultSms", function(){
 
 
 
-
-//python check program
 app.controller("edmTaskCtrl", function($scope, $http){
 	$scope.submit=function(){
-		// var name=$scope.edmTaskName;
-		// document.getElementById("edmTaskName").name;
-		
-		//task name
+	//task name
 		console.log($scope.edmTaskName);
-		//get the file name
+	//get the file name
 		$scope.fileName=document.getElementById("edmFile").value.replace(/.*[\/\\]/, '');
 		console.log(document.getElementById("edmFile").value.replace(/.*[\/\\]/, ''));
-		//upload file via php
-		var file_data = $("#edmFile").prop("files")[0];   
-    	var form_data = new FormData();                  
-    	form_data.append("file", file_data)
-		$.ajax(
-      	{
+		console.log($scope.fileName);
+	//upload file via php
+		var file_data = $("#edmFile").prop("files")[0];
+		var form_data = new FormData();                  
+		form_data.append("file", file_data)
+		$.ajax({
 			url: "./php/edmUpload.php",
 			type: "POST",
 			data: form_data,
@@ -143,43 +138,59 @@ app.controller("edmTaskCtrl", function($scope, $http){
 		});
 		$scope.go();
 	};
-
+//go & go2 to guarantee the execution order
 // run python code by php
 	$scope.go=function(){
+		console.log($scope.fileName);
+		console.log($scope.edmTaskName);
 		$http.post('php/edmTaskSubmit.php',{
-			zip_path:"$scope.zipPath",			//!!!!!!!!!!!!!!!!!!!!!!!
-			task_name:"$scope.edmTaskName",
+			zip_path:$scope.fileName,			
+			task_name:$scope.edmTaskName,
 			company_name:'ETU'
 		}).success(function(data){
 			$scope.msg=data;
-			//zz
-			console.log("@@");
+			console.log("edmTaskSubmit done");
 			console.log($scope.msg);
-			console.log($scope.msg.task_id);
 			$scope.go2();
 		});
 	};
 // push task_name & task_id into tasks.json
 	$scope.go2=function(){
-		$http.post('php/edmWriteJson.php',{
-			taskName: $scope.edmTaskName,
-			taskID: $scope.msg.task_id	
-		}).success(function(data){
-			console.log("write...");
-		}).error(function(data){
-			console.log("error");
-			console.log(data);
-		});
+		if($scope.msg.status=="SUCCESS"){
+                	$scope.response="The EDM task has been submitted. Please wait for the result.";
+        		$http.post('php/edmTaskSubmit2.php',{
+                        	task_id:$scope.msg.task_id,
+                        	task_name:$scope.edmTaskName,
+                        	company_id:$scope.msg.company_id,
+                        	company_name:'ETU'
+                	}).success(function(data2){
+                        	$scope.msg2=data2;
+                        	console.log(data2);
+				console.log("edmTaskSubmit2 done");
+                        });
+			$http.post('php/edmWriteJson.php',{
+				taskName: $scope.edmTaskName,
+                        	taskID: $scope.msg.task_id
+			}).success(function(data){
+        	                console.log("write...");
+                	}).error(function(data){
+                        	console.log("error");
+                        	console.log(data);
+	                });
+
+		}
+        	else{
+                	$scope.response="Please check the data format and submit the task again.";
+        	}	
 	};
 });
 
-
-
-
 app.controller("edmResultCtrl", function($scope, $http){
+//for select items
 	$http.get('json/edmTasks.json')
 	.success(function(data){
 		$scope.edmTasks=data;
+		console.log($scope.edmTasks);
 	});
 
 	$scope.submit=function(){
@@ -190,13 +201,11 @@ app.controller("edmResultCtrl", function($scope, $http){
 			task_id:$scope.taskID
 		}).success(function(data){
 			$scope.edmResult=data;
-			//zz
 			console.log("@@");
 			console.log($scope.edmResult);
 		});
 	};
 });
-
 
 
 app.controller("smsTaskCtrl", function($scope, $http){
@@ -217,57 +226,68 @@ app.controller("smsTaskCtrl", function($scope, $http){
 			contentType: false,
 			success: function(data){
 				console.log(data);
-				console.log("WOWOWOWWOW");
 			} 
 		});
 		$scope.go();
-		$scope.go2();
 	};
 	$scope.go=function(){
+		console.log($scope.smsTaskName);
 		//call csvreader.php to send sms
 		$http.post('php/csvreader.php',{
 			// sendfilename
-			fileName: $scope.fileName
+			fileName: $scope.fileName,
+			taskName: $scope.smsTaskName 
 		}).success(function(data){
-			// $scope.msg=JSON.parse(data);
 			$scope.msg=data;
-			console.log("@@");
 			console.log($scope.msg);
 		});
 	};
-	$scope.go2=function(){
-		$http.post('php/smsWriteJson.php',{
-			taskName: $scope.smsTaskName,
-			fileName: $scope.fileName	
-		}).success(function(data){
-			console.log("write...");
-		}).error(function(data){
-			console.log("error");
-			console.log(data);
-		});
-	};
-
-
 });
 
 app.controller("smsResultCtrl", function($scope, $http){
-	$http.get('json/smsTasks.json')
+	$http.get('php/getTasklist.php')
 	.success(function(data){
 		$scope.smsTasks=data;
+		//console.log($scope.smsTasks);
 	});
 
 	$scope.submit=function(){
 	//get filename
-		$scope.fileName=document.getElementById("smsSelectTask").value;
+		//console.log($scope.logName);
+		//$scope.fileName=document.getElementById("smsSelectTask").value;
 	//call txtreader.php
-		$http.post('php/txtreader.php',{
-			fileName:$scope.fileName
+		//var name="aaa.txt";
+		$scope.log_name=document.getElementById("smsSelectTask").value;
+		//$scope.task_name=document.getElementById("smsSelectTask").taskname;
+		console.log($scope.log_name);
+		//console.log($scope.task_name);
+		console.log(document.getElementById("smsSelectTask"));
+		$http({
+			method: 'POST',
+			url: 'php/txtreader.php',
+			data: "fileName=" + $scope.log_name,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		}).success(function(data){
 			$scope.smsResult=data;
 			//zz
 			console.log("@@");
-			console.log($scope.edmResult);
+			console.log($scope.smsResult);
+		}).error(function(data){
+			console.log("error QQ");
 		});
+
+		//$http.post('php/txtreader.php',{
+		//	'logName' : $scope.log_name,
+		//	'taskName' : $scope.task_name
+		//}).success(function(data){
+		//	$scope.smsResult=data;
+		//	//zz
+		//	console.log("@@");
+		//	console.log($scope.smsResult);
+		//}).error(function(data){
+		//	console.log("error QQ");
+		//});
+		
 		//call get_edm_report.py
 		// $http.post('php/edmResult.php',{
 		// 	task_id:$scope.taskID
@@ -277,7 +297,8 @@ app.controller("smsResultCtrl", function($scope, $http){
 		// 	console.log("@@");
 		// 	console.log($scope.edmResult);
 		// });
-		console.log($scope.fileName);
+		//console.log($scope.fileName);
+		console.log("T___T");
 	};
 
 
@@ -291,22 +312,6 @@ app.controller("smsResultCtrl", function($scope, $http){
 	// 	});
 	// }
 });
-
-app.controller("phpCtrl", function($scope, $http){
-	$scope.go=function(){
-		$http.post('php/pytest.php').success(function(data){
-			// $scope.msg=JSON.parse(data);
-			$scope.msg=data;
-			console.log("@@");
-			console.log($scope.msg);
-		});
-		// window.location.reload();
-	};
-});
-
-
-
-
 
 
 

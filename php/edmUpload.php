@@ -8,7 +8,7 @@
 
     //將上傳成功的檔案放到指定路徑下
     $moveRes = move_uploaded_file($_FILES["file"]["tmp_name"],
-    "/Users/htlin/Sites/Etu-eDM/edmFiles/". $_FILES["file"]["name"]);
+    "../edmFiles/". $_FILES["file"]["name"]);
 
     $html .= "Uploaded file is moved to /edmFiles". "<br />";
     echo $html;

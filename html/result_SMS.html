@@ -1,12 +1,13 @@
 <div ng-controller="smsResultCtrl">
 	<h3>選擇任務
 	<select id="smsSelectTask">
-    	<option ng-repeat="smsTask in smsTasks" value="{{smsTask.fileName}}">{{smsTask.taskName}}</option>
+    	<option ng-repeat="smsTask in smsTasks" value="{{smsTask.logName}};{{smsTask.taskName}}">{{smsTask.taskName}}</option>
 	</select>
 	<button type="button" ng-click="submit()">送出</button><br>
-	{{fileName}}
 	</h3>
+	<!--{{log_name}}-->	
 	<h5>
+		<p>Total Msg: {{smsResult.Total_msg}}</p>
 		<p>Delivered Rate: {{smsResult.delivered_rate}}</p>
 		<p>Undelivered Rate: {{smsResult.undelivered_rate}}</p>
 		<p>Fail Rate: {{smsResult.sendMsgFail_rate}}</p>
